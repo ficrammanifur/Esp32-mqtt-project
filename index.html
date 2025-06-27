@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 MQTT Control Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-microchip"></i>
+                    <h1>ESP32 Control Dashboard</h1>
+                </div>
+                <div class="connection-status" id="connectionStatus">
+                    <i class="fas fa-wifi"></i>
+                    <span id="statusText">Connecting...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-sliders-h"></i> LED Control Panel</h2>
+                    <div class="led-status" id="ledStatus">
+                        <span class="status-indicator unknown"></span>
+                        <span>Status: Unknown</span>
+                    </div>
+                </div>
+                
+                <div class="control-buttons">
+                    <button class="btn btn-on" onclick="sendCommand('ON')" id="btnOn">
+                        <i class="fas fa-power-off"></i>
+                        <span>Turn ON</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    <button class="btn btn-off" onclick="sendCommand('OFF')" id="btnOff">
+                        <i class="fas fa-times-circle"></i>
+                        <span>Turn OFF</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+
+                <div class="device-info">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <i class="fas fa-server"></i>
+                            <div>
+                                <h4>MQTT Broker</h4>
+                                <p>broker.emqx.io:8084</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-hashtag"></i>
+                            <div>
+                                <h4>Topic</h4>
+                                <p>OpenCV-IoT6601</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-microchip"></i>
+                            <div>
+                                <h4>Client ID</h4>
+                                <p>PACEE112233</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-plug"></i>
+                            <div>
+                                <h4>LED Pin</h4>
+                                <p>GPIO 5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Log -->
+                <div class="message-log">
+                    <h3><i class="fas fa-terminal"></i> Message Log</h3>
+                    <div class="log-content" id="messageLog">
+                        <div class="log-item">
+                            <span class="timestamp">Ready</span>
+                            <span class="message">Waiting for connection...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Simulation Link -->
+            <section class="simulation-section">
+                <div class="simulation-card">
+                    <div class="simulation-header">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Test LED Simulation</h3>
+                    </div>
+                    <p>Click the link below to open the Wokwi simulation and test if the LED is working. Make sure to run the simulation first!</p>
+                    <a href="https://wokwi.com/projects/418425453311975425" target="_blank" class="simulation-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open Wokwi Simulation
+                    </a>
+                    <div class="simulation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <span>Click the simulation link above</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <span>Press the green "Start Simulation" button</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span>Use the control buttons above to test LED</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manual Book -->
+            <section class="manual-section">
+                <div class="manual-header">
+                    <i class="fas fa-book"></i>
+                    <h2>User Manual & Documentation</h2>
+                </div>
+
+                <div class="manual-content">
+                    <!-- Getting Started -->
+                    <div class="manual-card">
+                        <div class="manual-card-header">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Getting Started</h3>
+                        </div>
+                        <div class="manual-card-content">
+                            <h4>Prerequisites:</h4>
+                            <ul>
+                                <li>ESP32 development board</li>
+                                <li>LED connected to GPIO pin 5</li>
+                                <li>WiFi connection</li>
+                                <li>Arduino IDE with ESP32 board package</li>
+                            </ul>
+                            
+                            <h4>Quick Setup:</h4>
+                            <ol>
+                                <li>Upload the provided Arduino code to your ESP32</li>
+                                <li>Ensure your ESP32 is connected to WiFi</li>
+                                <li>Open this web interface</li>
+                                <li>Wait for "Connected" status</li>
+                                <li>Start controlling your LED!</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- How It Works -->
+                    <div class="manual-card">
+                        <div class="manual-card-header">
+                            <i class="fas fa-cogs"></i>
+                            <h3>How It Works</h3>
+                        </div>
+                        <div class="manual-card-content">
+                            <h4>MQTT Communication:</h4>
+                            <p>This system uses MQTT (Message Queuing Telemetry Transport) protocol for communication between the web interface and ESP32.</p>
+                            
+                            <div class="flow-diagram">
+                                <div class="flow-step">
+                                    <i class="fas fa-laptop"></i>
+                                    <span>Web Interface</span>
+                                </div>
+                                <div class="flow-arrow">→</div>
+                                <div class="flow-step">
+                                    <i class="fas fa-cloud"></i>
+                                    <span>MQTT Broker</span>
+                                </div>
+                                <div class="flow-arrow">→</div>
+                                <div class="flow-step">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>ESP32</span>
+                                </div>
+                            </div>
+
+                            <h4>Message Flow:</h4>
+                            <ul>
+                                <li><strong>ON Command:</strong> Sends "ON" message to turn LED on</li>
+                                <li><strong>OFF Command:</strong> Sends "OFF" message to turn LED off</li>
+                                <li><strong>Topic:</strong> All messages use "OpenCV-IoT6601" topic</li>
+                                <li><strong>Feedback:</strong> ESP32 can send status updates back</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Troubleshooting -->
+                    <div class="manual-card">
+                        <div class="manual-card-header">
+                            <i class="fas fa-wrench"></i>
+                            <h3>Troubleshooting</h3>
+                        </div>
+                        <div class="manual-card-content">
+                            <h4>Connection Issues:</h4>
+                            <div class="troubleshoot-item">
+                                <strong>Problem:</strong> "Disconnected" or "Error" status
+                                <br><strong>Solution:</strong>
+                                <ul>
+                                    <li>Check your internet connection</li>
+                                    <li>Refresh the page</li>
+                                    <li>Try a different browser</li>
+                                    <li>Disable ad blockers or VPN</li>
+                                </ul>
+                            </div>
+
+                            <div class="troubleshoot-item">
+                                <strong>Problem:</strong> LED not responding
+                                <br><strong>Solution:</strong>
+                                <ul>
+                                    <li>Verify ESP32 is powered and running</li>
+                                    <li>Check WiFi connection on ESP32</li>
+                                    <li>Ensure LED is properly connected to GPIO 5</li>
+                                    <li>Check serial monitor for error messages</li>
+                                </ul>
+                            </div>
+
+                            <div class="troubleshoot-item">
+                                <strong>Problem:</strong> Commands not working
+                                <br><strong>Solution:</strong>
+                                <ul>
+                                    <li>Wait for "Connected" status before sending commands</li>
+                                    <li>Check if ESP32 is subscribed to correct topic</li>
+                                    <li>Verify MQTT broker settings match</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Specifications -->
+                    <div class="manual-card">
+                        <div class="manual-card-header">
+                            <i class="fas fa-list-alt"></i>
+                            <h3>Technical Specifications</h3>
+                        </div>
+                        <div class="manual-card-content">
+                            <div class="spec-grid">
+                                <div class="spec-item">
+                                    <strong>MQTT Broker:</strong>
+                                    <span>broker.emqx.io</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>WebSocket Port:</strong>
+                                    <span>8084 (WSS)</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>Topic:</strong>
+                                    <span>OpenCV-IoT6601</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>Client ID:</strong>
+                                    <span>PACEE112233</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>LED Pin:</strong>
+                                    <span>GPIO 5 (Green LED)</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>Commands:</strong>
+                                    <span>"ON" / "OFF"</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>WiFi Network:</strong>
+                                    <span>Wokwi-GUEST</span>
+                                </div>
+                                <div class="spec-item">
+                                    <strong>Baud Rate:</strong>
+                                    <span>115200</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Reference -->
+                    <div class="manual-card">
+                        <div class="manual-card-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Code Reference</h3>
+                        </div>
+                        <div class="manual-card-content">
+                            <h4>Key Functions in ESP32 Code:</h4>
+                            <div class="code-reference">
+                                <div class="code-item">
+                                    <strong>wifiConnect():</strong> Establishes WiFi connection
+                                </div>
+                                <div class="code-item">
+                                    <strong>mqttReconnect():</strong> Connects to MQTT broker and subscribes to topic
+                                </div>
+                                <div class="code-item">
+                                    <strong>callback():</strong> Handles incoming MQTT messages and controls LED
+                                </div>
+                                <div class="code-item">
+                                    <strong>client.loop():</strong> Maintains MQTT connection in main loop
+                                </div>
+                            </div>
+
+                            <h4>Pin Configuration:</h4>
+                            <div class="pin-config">
+                                <div class="pin-item">
+                                    <span class="pin-number">GPIO 4</span>
+                                    <span class="pin-desc">Main LED (unused in current code)</span>
+                                </div>
+                                <div class="pin-item">
+                                    <span class="pin-number">GPIO 5</span>
+                                    <span class="pin-desc">Green LED (controlled via MQTT)</span>
+                                </div>
+                                <div class="pin-item commented">
+                                    <span class="pin-number">GPIO 13</span>
+                                    <span class="pin-desc">PIR Sensor (commented out)</span>
+                                </div>
+                                <div class="pin-item commented">
+                                    <span class="pin-number">GPIO 34</span>
+                                    <span class="pin-desc">LDR Sensor (commented out)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ESP32 MQTT Control Dashboard. Built with ❤️ for IoT enthusiasts.</p>
+        </div>
+    </footer>
+
+    <!-- MQTT.js Library -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
