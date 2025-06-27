@@ -12,8 +12,14 @@ const messageLog = document.getElementById("messageLog");
 const btnOn = document.getElementById("btnOn");
 const btnOff = document.getElementById("btnOff");
 
+// Check if DOM elements exist
+if (!statusElement || !connectionStatus) {
+  console.error("DOM elements not found: statusElement =", statusElement, "connectionStatus =", connectionStatus);
+}
+
 // Initialize connection when page loads
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM loaded, initializing MQTT...");
   connectToMQTT();
   addLogMessage("System", "Initializing MQTT connection...");
 });
@@ -24,7 +30,6 @@ function connectToMQTT() {
     updateConnectionStatus("connecting");
     addLogMessage("System", "Connecting to broker.emqx.io...");
 
-    // Create unique client ID
     const clientId = `web-client-${Math.random().toString(16).substr(2, 8)}`;
 
     client = mqtt.connect(MQTT_BROKER, {
@@ -35,13 +40,11 @@ function connectToMQTT() {
       keepalive: 60,
     });
 
-    // Connection successful
     client.on("connect", () => {
       console.log("Connected to MQTT broker at:", new Date().toLocaleTimeString());
       updateConnectionStatus("connected");
       addLogMessage("MQTT", "Connected successfully!");
 
-      // Subscribe to topic
       client.subscribe(MQTT_TOPIC, { qos: 1 }, (err) => {
         if (!err) {
           console.log(`Subscribed to ${MQTT_TOPIC}`);
@@ -53,28 +56,24 @@ function connectToMQTT() {
       });
     });
 
-    // Connection error
     client.on("error", (err) => {
       console.error("Connection error details:", err);
       updateConnectionStatus("error");
       addLogMessage("Error", `Connection failed: ${err.message}`);
     });
 
-    // Reconnecting
     client.on("reconnect", () => {
       console.log("Reconnecting...");
       updateConnectionStatus("connecting");
       addLogMessage("MQTT", "Attempting to reconnect...");
     });
 
-    // Connection lost
     client.on("offline", () => {
       console.log("Client offline");
       updateConnectionStatus("error");
       addLogMessage("MQTT", "Connection lost - client offline");
     });
 
-    // Message received
     client.on("message", (topic, message) => {
       const payload = message.toString();
       console.log("Received message:", payload, "on topic:", topic);
@@ -104,7 +103,6 @@ function sendCommand(command) {
       });
       updateLedStatus(command);
 
-      // Add visual feedback
       const button = command === "ON" ? btnOn : btnOff;
       button.style.transform = "scale(0.95)";
       setTimeout(() => {
@@ -122,29 +120,33 @@ function sendCommand(command) {
 
 // Update connection status display
 function updateConnectionStatus(status) {
+  if (!connectionStatus || !statusElement) {
+    console.error("Cannot update connection status: elements missing");
+    return;
+  }
   connectionStatus.className = `connection-status ${status}`;
   switch (status) {
     case "connected":
       statusElement.textContent = "Connected";
-      statusElement.parentElement.innerHTML = '<i class="fas fa-wifi"></i><span>Connected</span>';
+      connectionStatus.innerHTML = '<i class="fas fa-wifi"></i><span>Connected</span>';
       btnOn.disabled = false;
       btnOff.disabled = false;
       break;
     case "connecting":
       statusElement.textContent = "Connecting...";
-      statusElement.parentElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Connecting...</span>';
+      connectionStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Connecting...</span>';
       btnOn.disabled = true;
       btnOff.disabled = true;
       break;
     case "error":
       statusElement.textContent = "Connection Error";
-      statusElement.parentElement.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Error</span>';
+      connectionStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Error</span>';
       btnOn.disabled = true;
       btnOff.disabled = true;
       break;
     default:
       statusElement.textContent = "Disconnected";
-      statusElement.parentElement.innerHTML = '<i class="fas fa-wifi-slash"></i><span>Disconnected</span>';
+      connectionStatus.innerHTML = '<i class="fas fa-wifi-slash"></i><span>Disconnected</span>';
       btnOn.disabled = true;
       btnOff.disabled = true;
   }
@@ -152,6 +154,10 @@ function updateConnectionStatus(status) {
 
 // Update LED status display
 function updateLedStatus(command) {
+  if (!ledStatus) {
+    console.error("ledStatus element not found");
+    return;
+  }
   const indicator = ledStatus.querySelector(".status-indicator");
   const statusText = ledStatus.querySelector("span");
   if (command === "ON") {
@@ -169,6 +175,10 @@ function updateLedStatus(command) {
 
 // Add message to log
 function addLogMessage(type, message) {
+  if (!messageLog) {
+    console.error("messageLog element not found");
+    return;
+  }
   const timestamp = new Date().toLocaleTimeString();
   const logItem = document.createElement("div");
   logItem.className = "log-item";
