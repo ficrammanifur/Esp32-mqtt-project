@@ -79,10 +79,7 @@ function connectToMQTT() {
       const payload = message.toString();
       console.log("Received message:", payload, "on topic:", topic);
       messageCount++;
-
       addLogMessage("Received", `${payload} (from ESP32)`);
-
-      // Update LED status based on received message
       updateLedStatus(payload);
     });
   } catch (error) {
@@ -105,8 +102,6 @@ function sendCommand(command) {
           addLogMessage("Sent", `${command} command to ESP32`);
         }
       });
-
-      // Optimistically update LED status
       updateLedStatus(command);
 
       // Add visual feedback
@@ -128,7 +123,6 @@ function sendCommand(command) {
 // Update connection status display
 function updateConnectionStatus(status) {
   connectionStatus.className = `connection-status ${status}`;
-
   switch (status) {
     case "connected":
       statusElement.textContent = "Connected";
@@ -160,7 +154,6 @@ function updateConnectionStatus(status) {
 function updateLedStatus(command) {
   const indicator = ledStatus.querySelector(".status-indicator");
   const statusText = ledStatus.querySelector("span");
-
   if (command === "ON") {
     indicator.className = "status-indicator on";
     statusText.textContent = "Status: LED ON";
@@ -179,20 +172,14 @@ function addLogMessage(type, message) {
   const timestamp = new Date().toLocaleTimeString();
   const logItem = document.createElement("div");
   logItem.className = "log-item";
-
   logItem.innerHTML = `
-        <span class="timestamp">${timestamp}</span>
-        <span class="message">[${type}] ${message}</span>
-    `;
-
+    <span class="timestamp">${timestamp}</span>
+    <span class="message">[${type}] ${message}</span>
+  `;
   messageLog.appendChild(logItem);
-
-  // Keep only last 50 messages
   while (messageLog.children.length > 50) {
     messageLog.removeChild(messageLog.firstChild);
   }
-
-  // Auto scroll to bottom
   messageLog.scrollTop = messageLog.scrollHeight;
 }
 
@@ -214,19 +201,15 @@ setInterval(() => {
   }
 }, 10000);
 
-// Add some visual effects
+// Add visual effects and other event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  // Add smooth scroll behavior
   document.documentElement.style.scrollBehavior = "smooth";
-
-  // Add entrance animations
   const cards = document.querySelectorAll(".manual-card");
   cards.forEach((card, index) => {
     card.style.animationDelay = `${index * 0.1}s`;
   });
 });
 
-// Handle page visibility change
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     console.log("Page hidden - maintaining connection");
@@ -239,7 +222,6 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-// Keyboard shortcuts
 document.addEventListener("keydown", (event) => {
   if (event.ctrlKey || event.metaKey) {
     switch (event.key) {
@@ -255,6 +237,5 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// Add tooltip for keyboard shortcuts
 btnOn.title = "Click to turn LED ON (Ctrl+1)";
 btnOff.title = "Click to turn LED OFF (Ctrl+2)";
