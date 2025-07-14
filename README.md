@@ -57,9 +57,9 @@ The system uses MQTT protocol for reliable communication between the web interfa
 ## 🎮 Demo
 
 ### Live Simulation
-Test the system without physical hardware:
+```Test the system without physical hardware:
 **[🔗 Wokwi Simulation](https://wokwi.com/projects/418425453311975425)**
-
+```
 ### How to Test:
 1. Click the simulation link above
 2. Press the green "Start Simulation" button in Wokwi
@@ -159,7 +159,7 @@ npx http-server
 
 ## 📁 File Structure
 
-\`\`\`
+```
 esp32-mqtt-control/
 ├── README.md                 # Project documentation
 ├── esp32_code.ino           # Arduino code for ESP32
@@ -173,7 +173,7 @@ esp32-mqtt-control/
 └── assets/                  # Images and resources
     ├── screenshots/         # Interface screenshots
     └── diagrams/           # Circuit diagrams
-\`\`\`
+```
 
 ## ⚙️ Configuration
 
