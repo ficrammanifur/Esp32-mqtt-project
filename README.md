@@ -1,9 +1,13 @@
 # <h1 align="center"> 🚀 ESP32 MQTT Control Dashboard</h1>
 <p align="center"><em>A modern, responsive web interface for controlling ESP32 devices via MQTT protocol. This project provides real-time LED control through a beautiful dashboard with comprehensive documentation and simulation support.</em></p>
 
-![ESP32 MQTT Dashboard](https://img.shields.io/badge/ESP32-MQTT%20Control-blue?style=for-the-badge&logo=espressif)
-![Web Interface](https://img.shields.io/badge/Web-Interface-green?style=for-the-badge&logo=html5)
-![MQTT](https://img.shields.io/badge/Protocol-MQTT-orange?style=for-the-badge&logo=mqtt)
+<p align="center">
+  <img src="https://img.shields.io/badge/ESP32-MQTT%20Control-blue?style=for-the-badge&logo=espressif" />
+  <img src="https://img.shields.io/badge/Web-Interface-green?style=for-the-badge&logo=html5" />
+  <img src="https://img.shields.io/badge/Protocol-MQTT-orange?style=for-the-badge&logo=mqtt" />
+</p>
+
+<p align="center"> <img src="https://img.shields.io/badge/C++-ESP32-blue?style=for-the-badge&logo=arduino" /> <img src="https://img.shields.io/badge/HTML-Web%20UI-orange?style=for-the-badge&logo=html5" /> <img src="https://img.shields.io/badge/JavaScript-Control-green?style=for-the-badge&logo=javascript" /> <img src="https://img.shields.io/badge/MQTT-Protocol-purple?style=for-the-badge&logo=mqtt" /> </p>
 
 ## 📋 Table of Contents
 
