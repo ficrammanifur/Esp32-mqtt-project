@@ -54,9 +54,11 @@ The system uses MQTT protocol for reliable communication between the web interfa
 ## 🎮 Demo
 
 ### Live Simulation
-```Test the system without physical hardware:
-**[🔗 Wokwi Simulation](https://wokwi.com/projects/418425453311975425)**
+Test the system without physical hardware:
+```Wokwi Simulation
+https://wokwi.com/projects/418425453311975425
 ```
+
 ### How to Test:
 1. Click the simulation link above
 2. Press the green "Start Simulation" button in Wokwi
@@ -128,7 +130,6 @@ python -m http.server 8000
 npx http-server
 ```
 Then open: http://localhost:8000
-
 
 #### Option 3: GitHub Pages
 1. Fork this repository
@@ -352,5 +353,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ for the IoT community
 
 [⬆ Back to Top](#-esp32-mqtt-control-dashboard)
-
 </div>
