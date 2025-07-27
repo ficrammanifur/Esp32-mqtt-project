@@ -90,11 +90,11 @@ The system uses MQTT protocol for reliable communication between the web interfa
 ### 1. ESP32 Setup
 
 #### Install Required Libraries
-\`\`\`bash
+```bash
 # In Arduino IDE, go to Tools > Manage Libraries
 # Search and install:
 - PubSubClient by Nick O'Leary
-\`\`\`
+```
 
 #### Upload Arduino Code
 1. Open Arduino IDE
@@ -104,12 +104,12 @@ The system uses MQTT protocol for reliable communication between the web interfa
 5. Upload the code to your ESP32
 
 #### Hardware Connections
-\`\`\`
+```
 ESP32 Pin    Component
 ---------    ---------
 GPIO 5   →   LED Anode (long leg)
 GND      →   LED Cathode (via 220Ω resistor)
-\`\`\`
+```
 
 ### 2. Web Interface Setup
 
@@ -119,20 +119,21 @@ GND      →   LED Cathode (via 220Ω resistor)
 3. The interface will automatically connect to the MQTT broker
 
 #### Option 2: Local Web Server
-\`\`\`bash
+```bash
 # Using Python
-python -m http.server 8000
-
+python -m http.server 8000 
+```
+```
 # Using Node.js
 npx http-server
+```
+Then open: http://localhost:8000
 
-# Then open: http://localhost:8000
-\`\`\`
 
 #### Option 3: GitHub Pages
 1. Fork this repository
 2. Enable GitHub Pages in repository settings
-3. Access via: `https://yourusername.github.io/repository-name`
+3. Access via: `https://ficrammanifur/Esp32-mqtt-project`
 
 ## 🎯 Usage
 
@@ -158,7 +159,7 @@ npx http-server
 
 ```
 esp32-mqtt-control/
-├── README.md                 # Project documentation
+├── README.md                # Project documentation
 ├── esp32_code.ino           # Arduino code for ESP32
 ├── index.html               # Main web interface
 ├── main.js                  # JavaScript MQTT client
@@ -169,13 +170,13 @@ esp32-mqtt-control/
 │   └── api-reference.md     # MQTT API documentation
 └── assets/                  # Images and resources
     ├── screenshots/         # Interface screenshots
-    └── diagrams/           # Circuit diagrams
+    └── diagrams/            # Circuit diagrams
 ```
 
 ## ⚙️ Configuration
 
 ### ESP32 Configuration
-\`\`\`cpp
+```cpp
 // WiFi Settings
 const char* ssid = "Your_WiFi_Name";
 const char* password = "Your_WiFi_Password";
@@ -188,14 +189,14 @@ char clientId[50] = "PACEE112233";
 // Pin Configuration
 const int LED = 4;      // Main LED pin
 const int pinGreen = 5; // Controlled LED pin
-\`\`\`
+```
 
 ### Web Interface Configuration
-\`\`\`javascript
+```javascript
 // MQTT Configuration
 const MQTT_BROKER = "wss://broker.emqx.io:8084/mqtt"
 const MQTT_TOPIC = "OpenCV-IoT6601"
-\`\`\`
+```
 
 ### Custom MQTT Broker
 To use your own MQTT broker:
@@ -215,7 +216,7 @@ To use your own MQTT broker:
 | `OpenCV-IoT6601` | ESP32 → Web | `"OFF"` | LED status confirmation |
 
 ### JavaScript Functions
-\`\`\`javascript
+```javascript
 // Send command to ESP32
 sendCommand("ON")   // Turn LED on
 sendCommand("OFF")  // Turn LED off
@@ -223,14 +224,14 @@ sendCommand("OFF")  // Turn LED off
 // Connection management
 connectToMQTT()     // Establish MQTT connection
 retryConnection()   // Retry failed connection
-\`\`\`
+```
 
 ### Arduino Functions
-\`\`\`cpp
+```cpp
 void wifiConnect()     // Connect to WiFi
 void mqttReconnect()   // Connect to MQTT broker
 void callback()        // Handle incoming messages
-\`\`\`
+```
 
 ## 🔧 Troubleshooting
 
@@ -274,17 +275,17 @@ void callback()        // Handle incoming messages
 ### Debug Mode
 
 #### ESP32 Serial Monitor
-\`\`\`cpp
+```cpp
 // Add to setup() for verbose debugging
 Serial.setDebugOutput(true);
-\`\`\`
+```
 
 #### Web Console Debugging
-\`\`\`javascript
+```javascript
 // Open browser developer tools (F12)
 // Check Console tab for error messages
 console.log("Debug information here");
-\`\`\`
+```
 
 ## 🤝 Contributing
 
