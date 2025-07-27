@@ -1,6 +1,5 @@
-# 🚀 ESP32 MQTT Control Dashboard
-
-A modern, responsive web interface for controlling ESP32 devices via MQTT protocol. This project provides real-time LED control through a beautiful dashboard with comprehensive documentation and simulation support.
+# <h1 align="center"> 🚀 ESP32 MQTT Control Dashboard</h1>
+<p align="center"><em>A modern, responsive web interface for controlling ESP32 devices via MQTT protocol. This project provides real-time LED control through a beautiful dashboard with comprehensive documentation and simulation support.</em></p>
 
 ![ESP32 MQTT Dashboard](https://img.shields.io/badge/ESP32-MQTT%20Control-blue?style=for-the-badge&logo=espressif)
 ![Web Interface](https://img.shields.io/badge/Web-Interface-green?style=for-the-badge&logo=html5)
@@ -314,33 +313,14 @@ Please include:
 - Steps to reproduce
 - Screenshots if applicable
 
-## 📄 License
+## 🪪 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-\`\`\`
-MIT License
-
-Copyright (c) 2024 ESP32 MQTT Control Dashboard
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-\`\`\`
+<p align="center">
+  <a href="https://github.com/ficrammanifur/Control-Motor-With-DABBLE-APP/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" />
+  </a>
+</p>
 
 ## 🙏 Acknowledgments
 
@@ -353,16 +333,16 @@ SOFTWARE.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/esp32-mqtt-control/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/esp32-mqtt-control/discussions)
-- **Email**: your.email@example.com
+- **Issues**: [GitHub Issues](https://github.com/ficrammanifur/esp32-mqtt-control/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ficrammanifur/esp32-mqtt-control/discussions)
+- **Email**: ficramm@gmail.com
 
 ## 🔗 Links
 
 - [🎮 Live Demo (Wokwi)](https://wokwi.com/projects/418425453311975425)
-- [📚 Documentation](https://github.com/yourusername/esp32-mqtt-control/wiki)
-- [🐛 Report Bug](https://github.com/yourusername/esp32-mqtt-control/issues/new?template=bug_report.md)
-- [💡 Request Feature](https://github.com/yourusername/esp32-mqtt-control/issues/new?template=feature_request.md)
+- [📚 Documentation](https://github.com/ficrammanifur/esp32-mqtt-control/wiki)
+- [🐛 Report Bug](https://github.com/ficrammanifur/esp32-mqtt-control/issues/new?template=bug_report.md)
+- [💡 Request Feature](https://github.com/ficrammanifur/esp32-mqtt-control/issues/new?template=feature_request.md)
 
 ---
 
