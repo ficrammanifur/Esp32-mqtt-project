@@ -351,6 +351,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **⭐ Star this repository if you found it helpful!**
 
 Made with ❤️ for the IoT community
-
-[⬆ Back to Top](#-esp32-mqtt-control-dashboard)
+[⬆ Back to Top](#Esp32-mqtt-project)
 </div>
