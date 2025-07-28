@@ -349,5 +349,4 @@ Please include:
 **⭐ Star this repository if you found it helpful!**
 
 Made with ❤️ for the IoT community
-[⬆ Back to Top](#Esp32-mqtt-project)
-</div>
+<p align="centre"><a href="#esp32-mqtt-project">⬆ Back to Top</a></p>
