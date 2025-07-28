@@ -349,4 +349,4 @@ Please include:
 **⭐ Star this repository if you found it helpful!**
 
 Made with ❤️ for the IoT community
-<p align="centre"><a href="#esp32 mqtt control dashboard">⬆ Back to Top</a></p>
+<p align="centre"><a href="#esp32-mqtt-control-dashboard">⬆ Back to Top</a></p>
