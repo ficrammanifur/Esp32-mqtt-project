@@ -313,11 +313,9 @@ Please include:
 - Steps to reproduce
 - Screenshots if applicable
 
-## 🪪 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📝 License
 <p align="center">
-  <a href="https://github.com/ficrammanifur/Control-Motor-With-DABBLE-APP/blob/main/LICENSE">
+  <a href="https://github.com/ficrammanifur/ficrammanifur/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" />
   </a>
 </p>
